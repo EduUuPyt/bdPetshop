@@ -1,0 +1,92 @@
+CLIENTE(
+    id_cliente,
+    nome,
+    cpf,
+    telefone,
+    email
+)
+
+FUNCIONARIO(
+    id_funcionario,
+    nome,
+    salario,
+    cargo
+)
+
+PET(
+    id_pet,
+    nome,
+    especie,
+    raca,
+    idade,
+    peso,
+    observacoes,
+    id_cliente
+)
+FK id_cliente referencia CLIENTE
+
+AGENDAMENTO(
+    id_agendamento,
+    data_agendamento,
+    tipo_servico,
+    observacoes,
+    id_cliente,
+    id_pet
+)
+FK id_cliente referencia CLIENTE
+FK id_pet referencia PET
+
+SERVICO(
+    id_servico,
+    valor,
+    descricao,
+    data_hora,
+    id_pet,
+    id_cliente,
+    id_tosador
+)
+FK id_pet referencia PET
+FK id_cliente referencia CLIENTE
+FK id_tosador referencia FUNCIONARIO
+
+VENDA(
+    id_venda,
+    data_venda,
+    valor_total,
+    status_venda,
+    id_cliente,
+    id_atendente
+)
+FK id_cliente referencia CLIENTE
+FK id_atendente referencia FUNCIONARIO
+
+PAGAMENTO(
+    id_pagamento,
+    valor_pago,
+    data_pagamento,
+    forma_pagamento,
+    status_pagamento,
+    id_venda
+)
+FK id_venda referencia VENDA
+
+PRODUTO(
+    id_produto,
+    nome,
+    descricao,
+    categoria,
+    preco,
+    estoque,
+    marca
+)
+
+ITEMVENDA(
+    id_item,
+    quantidade,
+    preco_unitario,
+    subtotal,
+    id_venda,
+    id_produto
+)
+FK id_venda referencia VENDA
+FK id_produto referencia PRODUTO
